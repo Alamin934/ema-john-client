@@ -9,13 +9,13 @@ import useCart from '../../hooks/useCart';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useCart();
-    const [page, setPage] = useState(0);
     const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
     // products to be rendered on the UI
     const [displayProducts, setDisplayProducts] = useState([]);
     const size = 10;
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page=${page}&&size=${size}`)
+        fetch(`http://localhost:5000/products?currentPage=${currentPage}&&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products);
@@ -24,7 +24,7 @@ const Shop = () => {
                 const pageNumber = Math.ceil(count / size);
                 setPageCount(pageNumber);
             });
-    }, [page]);
+    }, [currentPage]);
 
 
     const handleAddToCart = (product) => {
@@ -59,6 +59,7 @@ const Shop = () => {
                     onChange={handleSearch}
                     placeholder="Search Product" />
             </div>
+
             <div className="shop-container">
                 <div className="product-container">
                     {
@@ -66,16 +67,15 @@ const Shop = () => {
                             key={product.key}
                             product={product}
                             handleAddToCart={handleAddToCart}
-                        >
-                        </Product>)
+                        ></Product>)
                     }
                     <div className="pagination">
                         {
                             [...Array(pageCount).keys()]
                                 .map(number => <button
-                                    className={number === page ? 'selected' : ''}
                                     key={number}
-                                    onClick={() => setPage(number)}
+                                    className={currentPage === number ? 'selected' : ''}
+                                    onClick={() => setCurrentPage(number)}
                                 >{number + 1}</button>)
                         }
                     </div>
