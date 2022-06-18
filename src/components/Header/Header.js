@@ -11,8 +11,9 @@ const Header = () => {
             <img className="logo" src={logo} alt="" />
             <nav>
                 <Link to="/">Shop</Link>
-                <Link to="/orders">Order Review</Link>
+                <Link to="/orderReview">Order Review</Link>
                 <Link to="/inventory">Manage Inventory</Link>
+                {user.email && <Link to="/orders">Orders</Link>}
                 {user.email
                     ? <span>
                         <span style={{ color: '#fff' }}>{user.displayName}</span>

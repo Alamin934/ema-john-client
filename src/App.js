@@ -11,6 +11,7 @@ import Shop from './components/Shop/Shop';
 import AuthProvider from './components/context/AuthProvider';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Shipping from './components/Shipping/Shipping';
+import Orders from './components/Orders/Orders';
 
 
 
@@ -21,7 +22,7 @@ function App() {
         <Header />
         <Routes>
           <Route path='/' element={<Shop />} />
-          <Route path='/orders' element={<OrderReview />} />
+          <Route path='/orderReview' element={<OrderReview />} />
           <Route path='/shipping' element={
             <PrivateRoute>
               <Shipping></Shipping>
@@ -35,6 +36,11 @@ function App() {
           <Route path='/placeOrder' element={
             <PrivateRoute>
               <PlaceOrder></PlaceOrder>
+            </PrivateRoute>
+          } />
+          <Route path='/orders' element={
+            <PrivateRoute>
+              <Orders></Orders>
             </PrivateRoute>
           } />
           <Route path='/login' element={<Login />} />

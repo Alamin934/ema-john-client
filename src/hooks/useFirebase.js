@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, getIdToken } from "firebase/auth";
 import initializeAuthentication from "../firebase/firebase.initialize";
 
 
@@ -17,10 +17,12 @@ const useFirebase = () => {
         setIsLoading(true);
         return signInWithPopup(auth, googleProvider)
     }
-
+    //observed
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
             if (user) {
+                getIdToken(user)
+                    .then((idToken) => localStorage.setItem('idToken', idToken));
                 setUser(user);
             }
             else {
