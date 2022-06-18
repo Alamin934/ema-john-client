@@ -23,14 +23,15 @@ function App() {
         <Routes>
           <Route path='/' element={<Shop />} />
           <Route path='/orderReview' element={<OrderReview />} />
-          <Route path='/shipping' element={
-            <PrivateRoute>
-              <Shipping></Shipping>
-            </PrivateRoute>
-          } />
+
           <Route path='/inventory' element={
             <PrivateRoute>
               <Inventory></Inventory>
+            </PrivateRoute>
+          } />
+          <Route path='/shipping' element={
+            <PrivateRoute>
+              <Shipping></Shipping>
             </PrivateRoute>
           } />
           <Route path='/placeOrder' element={
